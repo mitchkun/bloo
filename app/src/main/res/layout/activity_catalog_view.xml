@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    tools:context="com.example.darkcode.esppra.CatalogView">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="41dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ote" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:srcCompat="@drawable/bloo_whitewashed" />
+
+    <ImageView
+        android:id="@+id/pbxBanner"
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/banner_bakground" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="©2019 Bloo"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/lblSubTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_toEndOf="@+id/svCatalogue"
+        android:text="Sub Total:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/txtSubTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lblSubTotal"
+        android:layout_below="@+id/svShoppingCart"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/lblSubTotal"
+        android:text="0.00"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
+    <ProgressBar
+        android:id="@+id/progS"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:id="@+id/svCatalogue"
+        android:layout_width="188dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/pbxBanner"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="5dp">
+
+
+        <LinearLayout
+            android:id="@+id/CatLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/svShoppingCart"
+        android:layout_width="193dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/pbxBanner"
+        android:layout_marginBottom="120dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/svCatalogue"
+        android:background="#a0ffffff">
+
+
+        <LinearLayout
+            android:id="@+id/CartLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/pbxCheckout"
+        android:layout_width="111dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/txtSubTotal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/checkout" />
+
+    <ImageView
+        android:id="@+id/pbxRemoveItem"
+        android:layout_width="98dp"
+        android:layout_height="29dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/svCatalogue"
+        android:layout_marginTop="-115dp"
+        app:srcCompat="@drawable/remove_item" />
+
+</RelativeLayout>

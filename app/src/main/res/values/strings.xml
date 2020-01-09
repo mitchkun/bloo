@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Bloo</string>
+    <string name="servicedesc">This service listens for data changes and forwards notifications.It is safe to use.</string>
+</resources>

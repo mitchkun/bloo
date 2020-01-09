@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    tools:context=".CheckOutActivity">
+
+    <ScrollView
+        android:id="@+id/svCatalogue2"
+        android:layout_width="188dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/pbxBanner2"
+        android:layout_marginTop="5dp">
+
+
+        <RelativeLayout
+            android:id="@+id/CatLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblTotal3"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/optMoMo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="MoMo Pay"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txtTotal3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/lblTotal3"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/lblTotal3"
+                android:text="0.00"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/lblDeliveryAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cboArea"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/svShoppingCart"
+                android:text="Delivery Address:"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/lblArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDeliverTo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/svShoppingCart"
+                android:text="Area:"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/lblDeliveryType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtCellphone"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/svShoppingCart"
+                android:text="Delivery Type:"
+                android:textColor="@android:color/black" />
+
+            <Spinner
+                android:id="@+id/cboArea"
+                style="@android:style/Widget.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_below="@+id/lblArea"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp" />
+
+            <Spinner
+                android:id="@+id/cboDeliveryType"
+                style="@android:style/Widget.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_below="@+id/lblDeliveryType"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/lblCellphone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDeliveryAddress"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/svShoppingCart"
+                android:text="Cellphone:"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/lblDeliverTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pbxBanner2"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/svShoppingCart"
+                android:text="Deliver To:"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/lblTotal3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblDelivery3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/svCatalogue"
+                android:text="Total:"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <EditText
+                android:id="@+id/txtDeliveryAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblDeliveryAddress"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Delivery Address"
+                android:inputType="text"
+                android:maxLines="5"
+                android:singleLine="false" />
+
+            <EditText
+                android:id="@+id/txtCellphone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblCellphone"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Cellphone"
+                android:inputType="phone"
+                android:maxLines="5"
+                android:singleLine="false" />
+
+            <EditText
+                android:id="@+id/txtDeliverTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblDeliverTo"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Name &amp; Surname"
+                android:inputType="text"
+                android:maxLines="5"
+                android:singleLine="false" />
+
+            <TextView
+                android:id="@+id/lblSubTotal3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/cboDeliveryType"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Sub Total:"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/txtSubTotal3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/lblSubTotal3"
+                android:layout_below="@+id/txtDeliveryAddress"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/lblSubTotal3"
+                android:text="0.00"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/lblDelivery3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSubTotal3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/svCatalogue"
+                android:text="Delivery Charge:"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/txtDeliveryCharge3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/lblDelivery3"
+                android:layout_below="@+id/txtSubTotal3"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/lblDelivery3"
+                android:text="0.00"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <ImageView
+                android:id="@+id/pbxMomo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/radioGroup"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/momopay" />
+
+            <ImageView
+                android:id="@+id/pbxFinalCheckOut"
+                android:layout_width="111dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/pbxMomo"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/checkout" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="©2019 Bloo"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        android:typeface="serif" />
+
+    <ProgressBar
+        android:id="@+id/progS"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:id="@+id/svShoppingCart2"
+        android:layout_width="193dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/pbxBanner2"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#a0ffffff">
+
+
+        <LinearLayout
+            android:id="@+id/CartLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/pbxBanner2"
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/banner_bakground" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="50dp"
+        android:layout_height="41dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ote" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:srcCompat="@drawable/bloo_whitewashed" />
+
+</RelativeLayout>
