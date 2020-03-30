@@ -1,18 +1,26 @@
 package com.example.darkcode.esppra;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsMessage;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -26,6 +34,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.base.CharMatcher;
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,12 +44,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.sql.Types.NULL;
 
 public class CheckOutActivity extends AppCompatActivity {
 
     ImageView checkOut;
+    private Handler mHandler = new Handler();
 
     int Dispwidth;
     int DispHeight;
@@ -52,7 +66,7 @@ public class CheckOutActivity extends AppCompatActivity {
     String DeliveryFeeString;
 
     Typeface tnrBold;
-    Typeface tnrRegular;//Bold
+    Typeface tnrRegular;
 
     Timestamp ts;
     private static ConnectionClass connectionClass;
@@ -113,11 +127,14 @@ public class CheckOutActivity extends AppCompatActivity {
 
                 }
             }
-            case PersistentData.SMS_PERMISSION_REQUEST_CODE: {
+            case PersistentData.SMS_PERMISSION_REQUEST_CODE:
+                {
                 if (grantResults.length > 0)
                 {
-                    for (int i = 0; i < grantResults.length; i++) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    for (int i = 0; i < grantResults.length; i++)
+                    {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                        {
                             PersistentData.smspermissiongranted = false;
                             return;
                         }
@@ -132,13 +149,25 @@ public class CheckOutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String languageToLoad  = "en"; // your language
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
         setContentView(R.layout.activity_check_out);
+
 
         connectionClass = new ConnectionClass();
 
         tnrBold = Typeface.createFromAsset(getAssets(), "timesbd.ttf");
         //Regular
         tnrRegular = Typeface.createFromAsset(getAssets(), "times.ttf");
+
+
 
         CartLayout = findViewById(R.id.CartLayout);
 
@@ -179,6 +208,7 @@ public class CheckOutActivity extends AppCompatActivity {
         ArrayAdapter adtDelivType = new ArrayAdapter<String>(CheckOutActivity.this, android.R.layout.simple_spinner_item, lstDeliveryType);
         cboDeliveryType.setAdapter(adtDelivType);
 
+        checkPermissions();
         cboDeliveryType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
 
@@ -287,37 +317,41 @@ public class CheckOutActivity extends AppCompatActivity {
                 int totalAmt = (int) Math.ceil(Double.parseDouble(String.valueOf(txtTotalAmount.getText()))); //always rounds up to the nearest whole
 
                 try {
-                    if ((PersistentData.callpermissiongranted)&&(PersistentData.smspermissiongranted)) {
-                        startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:*007*1*2*101248*"+String.valueOf(totalAmt)+"*Bloo CheckOut"+Uri.encode("#"))));
+                    if ((PersistentData.callpermissiongranted)&&(PersistentData.smspermissiongranted))
+                    {
 
-                        if (executionComplete == true)
+                        if (executionComplete && validateFields(v))
                         {
-                            long endWaitTime = System.currentTimeMillis() + 15*1000;
-                            while(System.currentTimeMillis() < endWaitTime && PersistentData.paymentConfirmed == false)
-                            {
 
-                                if(PersistentData.paymentConfirmed == true)
-                                {
-                                    RegisterOrder RO = new RegisterOrder();
-                                    RO.execute("");
+                            //Mobile Money USSD code dialer
+                            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:*007*1*2*101248*"+ totalAmt +"*123456"+Uri.encode("#"))));
+
+
+                                                                // Magic here*/
+
+                            mHandler.postDelayed(new Runnable() {
+                                public void run() {
+                                    Log.d("CheckOutActivity",": paymentconfirmed status " + PersistentData.paymentConfirmed);
+                                    if(PersistentData.paymentConfirmed){
+                                        Log.d("CheckOutActivity",": Order Started");
+                                        RegisterOrder RO = new RegisterOrder();
+                                        RO.execute("");
+                                        Log.d("CheckOutActivity",": Order Executed");
+                                    }
+                                    doStuff();
                                 }
-                                else
-                                 {
-                                    Thread.sleep(1000);
-                                 }
-                            }
-
-
+                            }, 60000);
                         }
                         else
                         {
-                            Toast.makeText(getBaseContext(), "Your order registration is still in progress.Please await its completion. Siyabonga.",Toast.LENGTH_LONG).show();
+                            //Incorrect Error handling
+                            //Toast.makeText(getBaseContext(), "Your order registration is still in progress.Please await its completion. Siyabonga.",Toast.LENGTH_LONG).show();
                         }
                     }
                     else
                     {
                         checkPermissions();
-                     }
+                    }
                 }
                 catch(Exception ex)
                 {
@@ -335,6 +369,29 @@ public class CheckOutActivity extends AppCompatActivity {
 
         AnimationDrawable animation = PersistentData.animation;
         pbxBanner.setBackgroundDrawable(animation);
+    }
+    private void doStuff() {
+        Toast.makeText(this, "Delayed Toast!", Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean validateFields(View view) {
+
+        if (txtDeliverTo.getText().toString().length() == 0 || txtCellphone.getText().toString().length() == 0  || txtDeliveryAddress.getText().toString().length() == 0 ) {
+            Snackbar.make(view, "Kindly Fill all the fields", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+            return false;
+        } else if (txtDeliverTo.getText().toString().length() < 4 || txtDeliverTo.getText().toString().length() > 50) {
+            txtDeliverTo.setError("Enter Name  & Surname");
+            return false;
+        } else if (txtDeliveryAddress.getText().toString().length() < 4 || txtDeliveryAddress.getText().toString().length() > 50) {
+            txtDeliveryAddress.setError("Enter valid delivery address");
+            return false;
+        } else if (!(txtCellphone.getText().toString().length() == 8)) { //|| ordernumber.getText().toString().length() > 12) {
+            txtCellphone.setError("Phone Number Must consist of 8 numbers");
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -412,6 +469,90 @@ public class CheckOutActivity extends AppCompatActivity {
         }
     }
 
+    /*public class SMSListener extends BroadcastReceiver {
+        private final String TAG = SMSListener.class.getSimpleName();
+        public final String pdu_type = "pdus";
+        public final String strMoMo = "MTN MoMo";
+        public String order_code;
+        public Boolean ordered = false;
+
+        public SMSListener() {
+        }
+
+        //public SMSListener(){}
+
+        //private  SMSListener.Common.OTPListener mListener; // this listener will do the magic of throwing the extracted OTP to all the bound views.
+        @TargetApi(Build.VERSION_CODES.M)
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            // this function is trigged when each time a new SMS is received on device.
+            Log.d(TAG, "onReceive: SMS Listener Class Started");
+            Bundle bundle = intent.getExtras();
+            //msgs = new SmsMessage[pdus.length];
+            SmsMessage[] msgs;
+            String strMessage = "";
+            String strSender = "";
+            String format = bundle.getString("format");
+            // Retrieve the SMS message received.
+            Object[] pdus = (Object[]) bundle.get(pdu_type);
+            if (pdus != null) {
+                Log.d(TAG, "onReceive: pdus not null");
+                // Check the Android version.
+                boolean isVersionM = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
+                // Fill the msgs array.
+                msgs = new SmsMessage[pdus.length];
+                for (int i = 0; i < msgs.length; i++) {
+                    // Check Android version and use appropriate createFromPdu.
+                    if (isVersionM) {
+                        // If Android version M or newer:
+                        Log.d(TAG, "onReceive: isVersionM");
+                        msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i], format);
+                    } else {
+                        // If Android version L or older:
+                        Log.d(TAG, "onReceive: isnt isVersionM");
+                        msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                    }
+                    // Build the message to show.
+                    strSender = msgs[i].getOriginatingAddress();
+                    Log.d(TAG, "onReceive: "+ strSender);
+                    strMessage = msgs[i].getMessageBody();
+                    if (strSender.equals(strMoMo)) {
+                        Log.d(TAG, "onReceive: sms from MTN MoMo");
+                        order_code = CharMatcher.inRange('0', '9').retainFrom(strMessage);
+                        ordered = true;
+                        Log.d("CheckOutActivity",": order processing");
+                        RegisterOrder RO = new RegisterOrder();
+                        RO.execute("");
+
+                        // Log and display the SMS message.
+                        Log.d(TAG, "onReceive: " + order_code);
+                        Toast.makeText(context, order_code + " Successful", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+        }
+
+        public  String order(){
+            return order_code;
+        }
+
+        *//*public  void bindListener(SMSListener.Common.OTPListener listener) {
+            mListener = listener;
+        }
+
+        public  void unbindListener() {
+            mListener = null;
+        }
+
+        public interface Common {
+            interface OTPListener {
+                void onOTPReceived(String otp);
+            }
+        }*//*
+    }*/
+
     public class RegisterOrder extends AsyncTask<String, String, String>
     {
         String z = "";
@@ -437,7 +578,7 @@ public class CheckOutActivity extends AppCompatActivity {
             }
             if(isSuccess == true)
             {
-                Toast.makeText(getBaseContext(), "Thank you for shopping with Bloo. Your order is now in process. Siyabonga.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Thank you for shopping with Bloo. Siyabonga. Please proceed to pay.", Toast.LENGTH_LONG).show();
 
                 //Clear shopping cart
                 PersistentData.ArryShoppingCartItemNo.clear();
@@ -473,7 +614,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     String DeliverTo = String.valueOf(txtDeliverTo.getText());
                     String DeliveryAddress = String.valueOf(cboArea.getSelectedItem()) +": "+ String.valueOf(txtDeliveryAddress.getText());
                     String Cellphone = String.valueOf(txtCellphone.getText());
-                    String Email = "cymphiwear@gmail.com";
+                    String Email = "info@buybloo.com";
 
                     int IN1 = 0;
                     int QTYIN1 = 0;
@@ -1493,11 +1634,9 @@ public class CheckOutActivity extends AppCompatActivity {
                     if (rsMaxMNo.next())
                     {
                         ts = rsMaxMNo.getTimestamp(1);
-                    }
-                    //Do Nothing
-
-                    //if ((DeliverTo.compareTo("") != 0) && (DeliveryAddress.compareTo("") != 0) && (Cellphone.compareTo("") != 0) && (Subtotal.compareTo("") != 0) && (DeliveryFee.compareTo("") != 0) && (TotalAmount.compareTo("") != 0))
-                    //{
+                    }//Do Nothing
+                    if ((DeliverTo.compareTo("") != 0) && (DeliveryAddress.compareTo("") != 0) && (Cellphone.compareTo("") != 0) && (Subtotal.compareTo("") != 0))
+                    {
                         //Get server timestamp.
                         try{
 
@@ -1769,7 +1908,8 @@ public class CheckOutActivity extends AppCompatActivity {
                                 stmtAddBooking.setNull(55, NULL);
                             }
 
-                            if(IN26 != 0) {
+                            if(IN26 != 0)
+                            {
                                 stmtAddBooking.setInt(56, IN26);
                                 stmtAddBooking.setInt(57, QTYIN26);
                             }
@@ -2523,7 +2663,7 @@ public class CheckOutActivity extends AppCompatActivity {
                         stmtAddBooking.setString(206, Subtotal);
                         stmtAddBooking.setString(207, DeliveryFee);
                         stmtAddBooking.setString(208, TotalAmount);
-                        stmtAddBooking.setString(209, "Paid");
+                        stmtAddBooking.setString(209, "Pending");
                         stmtAddBooking.setString(210, DeliveryType);
 
                         stmtAddBooking.executeUpdate();
@@ -2537,8 +2677,14 @@ public class CheckOutActivity extends AppCompatActivity {
                          return z;
                       }
                     }
+                    else
+                    {
+                        isSuccess=false;
+                        z = "Missing delivery information. Please verify and try again.";
+                        return z;
+                    }
 
-                //}
+                }
             }catch(Exception ex)
             {
                 isSuccess=false;

@@ -2,11 +2,13 @@ package com.example.darkcode.esppra;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -237,7 +239,7 @@ public class Registration extends AppCompatActivity {
                     return z;
                 } else {
                     //Count StoreNos
-                    String cmdGetMaxStoreNo = "Select Count([StoreNo.]) from [Store]";
+                    String cmdGetMaxStoreNo = "Select Count([StoreNo.]) from [Store] where [Live] = 'Y'";
                     Statement stmtMaxStoreNo = con.createStatement();
                     ResultSet rsMaxStoreNo = stmtMaxStoreNo.executeQuery(cmdGetMaxStoreNo);
 
@@ -282,7 +284,8 @@ public class Registration extends AppCompatActivity {
                     if (PersistentData.ArryStoreNo.size() == 0) {
                         Toast.makeText(Registration.this, "No shop(s) currently available.", Toast.LENGTH_LONG).show();
                         executionComplete = true;
-                    } else {
+                    } else
+                        {
                         if (PersistentData.ArryStoreNo.size() > 0) {
                             //Find the difference between the storeNo array and items already painted(StoreLogoList array) to avoid
                             // re-painting already painted stores
@@ -296,12 +299,115 @@ public class Registration extends AppCompatActivity {
 
                                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(Dispwidth, DispHeight);
                                 image.setLayoutParams(layoutParams);
+                                //SupersparLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Superspar")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logosuperspar);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //PicknPayLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("PicknPay")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logopick_n_pay);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //BuynSaveSparLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("BuynSave Spar")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logobuynsave_spar);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //ShopriteLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Shoprite")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logoshoprite);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //USaveLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("USave")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logousave);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //SaveRiteLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("SaveRite")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logosave_rite);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //SpurLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Spur")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logospur);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //OceanBasketLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Ocean Basket")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logoocean_basket);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //GalitosLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Galitos")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logogalitos);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //PizzaInnLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Pizza Inn")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logopizza_inn);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //DebonairsLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Debonairs")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logodebonairs_pizza);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //SteersLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Steers")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logosteers);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //KFCLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("KFC")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logokfc);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //NandosLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Nandos")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logonandos);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //KingPieLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("King Pie")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logokingpie);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //OKFoodsLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("OK Foods")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logookfoods);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+                                //ClicksLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Clicks Logo")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logoclicks);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
 
-                                RLogo = android.util.Base64.decode(PersistentData.ArryLogo.get(t), android.util.Base64.DEFAULT);
-
-                                Bitmap ArtImage = BitmapFactory.decodeByteArray(RLogo, 0, RLogo.length);
-                                image.setImageBitmap(ArtImage);
-                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                //HungryLionLogo
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Hungry Lion")== 0)
+                                {
+                                    image.setImageResource(R.drawable.logohungry_lion);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
 
                                 final int generatedId = findUnusedId();
                                 StoreLogoList.add(generatedId);
@@ -321,6 +427,7 @@ public class Registration extends AppCompatActivity {
 
                                                 intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(0));
                                                 intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(0));
+                                                intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(0));
 
                                                 startActivity(intentCatalogueView);
                                             }
@@ -340,6 +447,7 @@ public class Registration extends AppCompatActivity {
 
                                                 intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                                 intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                                intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
                                                 startActivity(intentCatalogueView);
                                             }
                                         });
@@ -357,6 +465,7 @@ public class Registration extends AppCompatActivity {
                                                 intentCatalogueView = new Intent(Registration.this, CatalogView.class);
                                                 intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                                 intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                                intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
 
                                                 startActivity(intentCatalogueView);
                                             }
@@ -380,6 +489,7 @@ public class Registration extends AppCompatActivity {
 
                                                 intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                                 intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                                intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
                                                 startActivity(intentCatalogueView);
                                             }
                                         });
@@ -401,6 +511,7 @@ public class Registration extends AppCompatActivity {
 
                                                 intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                                 intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                                intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
                                                 startActivity(intentCatalogueView);
                                             }
                                         });
@@ -415,6 +526,7 @@ public class Registration extends AppCompatActivity {
 
                     }
                 }
+                RLayout.requestLayout();
                 progS.setVisibility(View.INVISIBLE);
             }
             if(firstLoad == false)
@@ -437,11 +549,115 @@ public class Registration extends AppCompatActivity {
                             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(Dispwidth, DispHeight);
                             image.setLayoutParams(layoutParams);
 
-                            RLogo = android.util.Base64.decode(PersistentData.ArryLogo.get(t), android.util.Base64.DEFAULT);
+                            //SupersparLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Superspar")== 0)
+                            {
+                                image.setImageResource(R.drawable.logosuperspar);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //PicknPayLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("PicknPay")== 0)
+                            {
+                                image.setImageResource(R.drawable.logopick_n_pay);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //BuynSaveSparLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("BuynSave Spar")== 0)
+                            {
+                                image.setImageResource(R.drawable.logobuynsave_spar);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //ShopriteLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Shoprite")== 0)
+                            {
+                                image.setImageResource(R.drawable.logoshoprite);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //USaveLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("USave")== 0)
+                            {
+                                image.setImageResource(R.drawable.logousave);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //SaveRiteLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("SaveRite")== 0)
+                            {
+                                image.setImageResource(R.drawable.logosave_rite);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //SpurLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Spur")== 0)
+                            {
+                                image.setImageResource(R.drawable.logospur);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //OceanBasketLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Ocean Basket")== 0)
+                            {
+                                image.setImageResource(R.drawable.logoocean_basket);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //GalitosLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Galitos")== 0)
+                            {
+                                image.setImageResource(R.drawable.logogalitos);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //PizzaInnLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Pizza Inn")== 0)
+                            {
+                                image.setImageResource(R.drawable.logopizza_inn);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //DebonairsLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Debonairs")== 0)
+                            {
+                                image.setImageResource(R.drawable.logodebonairs_pizza);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //SteersLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Steers")== 0)
+                            {
+                                image.setImageResource(R.drawable.logosteers);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //KFCLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("KFC")== 0)
+                            {
+                                image.setImageResource(R.drawable.logokfc);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //NandosLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Nandos")== 0)
+                            {
+                                image.setImageResource(R.drawable.logonandos);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //KingPieLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("King Pie")== 0)
+                            {
+                                image.setImageResource(R.drawable.logokingpie);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //OKFoodsLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("OK Foods")== 0)
+                            {
+                                image.setImageResource(R.drawable.logookfoods);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //ClicksLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Clicks")== 0)
+                            {
+                                image.setImageResource(R.drawable.logoclicks);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+                            //HungryLionLogo
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Hungry Lion")== 0)
+                            {
+                                image.setImageResource(R.drawable.logohungry_lion);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
 
-                            Bitmap ArtImage = BitmapFactory.decodeByteArray(RLogo, 0, RLogo.length);
-                            image.setImageBitmap(ArtImage);
-                            image.setScaleType(ImageView.ScaleType.FIT_XY);
 
                             final int generatedId = findUnusedId();
                             StoreLogoList.add(generatedId);
@@ -461,6 +677,7 @@ public class Registration extends AppCompatActivity {
 
                                             intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(0));
                                             intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(0));
+                                            intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(0));
 
                                             startActivity(intentCatalogueView);
                                         }
@@ -480,6 +697,8 @@ public class Registration extends AppCompatActivity {
 
                                             intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                             intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                            intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
+
                                             startActivity(intentCatalogueView);
                                         }
                                     });
@@ -497,6 +716,7 @@ public class Registration extends AppCompatActivity {
                                             intentCatalogueView = new Intent(Registration.this, CatalogView.class);
                                             intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                             intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                            intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
 
                                             startActivity(intentCatalogueView);
                                         }
@@ -520,6 +740,8 @@ public class Registration extends AppCompatActivity {
 
                                             intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                             intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                            intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
+
                                             startActivity(intentCatalogueView);
                                         }
                                     });
@@ -541,6 +763,7 @@ public class Registration extends AppCompatActivity {
 
                                             intentCatalogueView.putExtra("currentStoreNo", PersistentData.ArryStoreNo.get(StoreLogoList.indexOf(generatedId)));
                                             intentCatalogueView.putExtra("storeType", PersistentData.ArryType.get(StoreLogoList.indexOf(generatedId)));
+                                            intentCatalogueView.putExtra("storeName", PersistentData.ArryStoreName.get(StoreLogoList.indexOf(generatedId)));
                                             startActivity(intentCatalogueView);
                                         }
                                     });
@@ -575,7 +798,7 @@ public class Registration extends AppCompatActivity {
                     if (totalNoOfStoresReached == false)
                     {
                         //Get stores in 10s
-                        String cmdGetStores = "Select Top(10) [StoreNo.],[Store Name],[City],[Logo],[Type] from [Store] where [StoreNo.] >  " + lastStoreNoToBeGot;
+                        String cmdGetStores = "Select Top(10) [StoreNo.],[Store Name],[City],[Type] from [Store] where [Live] = 'Y' AND [StoreNo.] >  " + lastStoreNoToBeGot;
                         Statement stmtStores = con.createStatement();
                         ResultSet rsStores = stmtStores.executeQuery(cmdGetStores);
 
@@ -600,15 +823,11 @@ public class Registration extends AppCompatActivity {
                             String City = null;
                             City = rsStores.getString(3);
 
-                            //Logo;
-                            String Logo = "";
-
-                            Logo = rsStores.getString(4);
 
                             //Type;
                             String Type = "";
 
-                            Type = rsStores.getString(5);
+                            Type = rsStores.getString(4);
 
                             Boolean storeAlreadyAdded = false;
                             for (int s = 0; s < PersistentData.ArryStoreNo.size(); s++) {
@@ -621,7 +840,6 @@ public class Registration extends AppCompatActivity {
                                 PersistentData.ArryStoreNo.add(StoreNo);
                                 PersistentData.ArryStoreName.add(StoreName);
                                 PersistentData.ArryCity.add(City);
-                                PersistentData.ArryLogo.add(Logo);
                                 PersistentData.ArryType.add(Type);
                             }
 

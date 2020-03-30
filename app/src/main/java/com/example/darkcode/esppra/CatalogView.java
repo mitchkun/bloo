@@ -24,6 +24,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Locale;
+
+import android.app.Activity;
+import android.content.res.Configuration;
+
 
 import static com.example.darkcode.esppra.PersistentData.ArryCartTextViewIds;
 import static com.example.darkcode.esppra.PersistentData.ArryShoppingCartItemBrand;
@@ -51,7 +56,6 @@ public class CatalogView extends AppCompatActivity {
 
     int currentStoreNo;
 
-    int currentItemToBeRetrived;
 
     int Dispwidth;
     int DispHeight;
@@ -75,7 +79,6 @@ public class CatalogView extends AppCompatActivity {
 
 
     boolean executionComplete;
-
     boolean totalNoOfItemsReached;
 
 
@@ -89,15 +92,27 @@ public class CatalogView extends AppCompatActivity {
 
     int lastGotItemNo;
 
+    String storeName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog_view);
 
+        String languageToLoad  = "en"; // your language
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
         connectionClass = new ConnectionClass();
 
-removeItem = findViewById(R.id.pbxRemoveItem);
+        removeItem = findViewById(R.id.pbxRemoveItem);
 
+        int indexOfCurrentStore = PersistentData.ArryStoreNo.get(currentStoreNo);
+        storeName = PersistentData.ArryStoreName.get(indexOfCurrentStore);
 
         lastGotItemNo = 0;
         fID = PersistentData.lastfID;
@@ -114,6 +129,7 @@ removeItem = findViewById(R.id.pbxRemoveItem);
 
         currentStoreNo =  getIntent().getIntExtra("currentStoreNo",1);
         StoreType = getIntent().getStringExtra("storeType");
+        storeName = getIntent().getStringExtra("storeName");
 
         Display display = getWindowManager().getDefaultDisplay();
         Dispwidth = (display.getWidth() / 2) - 10; // ((display.getWidth()*20)/100)
@@ -275,7 +291,7 @@ removeItem = findViewById(R.id.pbxRemoveItem);
                     return z;
                 } else {
                     //Count StoreNos
-                    String cmdGetMaxItemsNo = "Select Count([ItemNo.]) from [Items] where [StoreNo.] = "+ currentStoreNo;
+                    String cmdGetMaxItemsNo = "Select Count([ItemNo.]) from [Items] where [StoreNo.] = "+ currentStoreNo +"and [Live] = 'Y'";
                     Statement stmtMaxItemsNo = con.createStatement();
                     ResultSet rsMaxItemsNo = stmtMaxItemsNo.executeQuery(cmdGetMaxItemsNo);
 
@@ -284,7 +300,8 @@ removeItem = findViewById(R.id.pbxRemoveItem);
                         try
                         {
                             MaxItemsNo = rsMaxItemsNo.getInt(1);
-                        } catch (Exception ex) {
+                        } catch (Exception ex)
+                        {
                             //Do Nothing
                         }
                     }
@@ -316,11 +333,14 @@ removeItem = findViewById(R.id.pbxRemoveItem);
         protected void onPostExecute(String r)
         {
 
-            if (totalNoOfItemsReached == false) {
+            if (totalNoOfItemsReached == false)
+            {
                 if (PersistentData.ArryItemNo.size() == 0) {
                     Toast.makeText(CatalogView.this, "No items(s) currently available.", Toast.LENGTH_LONG).show();
                     executionComplete = true;
-                } else {
+                }
+                else
+                    {
                     if (PersistentData.ArryItemNo.size() > 0) {
                         int totalNewItemsTobePainted = PersistentData.ArryItemNo.size() - (ItemTemplateList.size() / 2);
 
@@ -341,27 +361,116 @@ removeItem = findViewById(R.id.pbxRemoveItem);
                                     image.setBackgroundColor(Color.parseColor("#ffffff"));
                                     image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                                 } catch (Exception ex) {
-                                    if (StoreType.compareTo("Supermarket") == 0) {
-                                        Bitmap noImage = BitmapFactory.decodeResource(getBaseContext().getResources(),
-                                                R.drawable.groceries_no_images);
-                                        image.setImageBitmap(noImage);
-                                        image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+                                    //SupersparLogo
+                                    if(storeName.compareTo("Superspar") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagespar);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
-                                    if (StoreType.compareTo("Electronics") == 0) {
-                                        Bitmap noImage = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.electronics_no_image);
-                                        image.setImageBitmap(noImage);
-                                        image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                                    //PicknPayLogo
+                                    if(storeName.compareTo("PicknPay") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagepicknpay);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
-                                    if (StoreType.compareTo("Restaurant") == 0) {
-                                        Bitmap noImage = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.restaurants_no_image);
-                                        image.setImageBitmap(noImage);
-                                        image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                                    //BuynSaveSparLogo
+                                    if(storeName.compareTo("BuynSave Spar") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.no_image_buynsave);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
-                                    if (StoreType.compareTo("Hardware") == 0) {
-                                        Bitmap noImage = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.hardware_no_image);
-                                        image.setImageBitmap(noImage);
-                                        image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                    //ShopriteLogo
+                                    if(storeName.compareTo("Shoprite") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimageshoprite);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
+                                    //USaveLogo
+                                    if(storeName.compareTo("USave") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimageusave);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //SaveRiteLogo
+                                    if(storeName.compareTo("SaveRite") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagesaverite);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //SpurLogo
+                                    if(storeName.compareTo("Spur") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagespur);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //OceanBasketLogo
+                                    if(storeName.compareTo("Ocean Basket") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimageoceanbasket);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //GalitosLogo
+                                    if(storeName.compareTo("Pizza Inn") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagegalitos);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //PizzaInnLogo
+                                    if(storeName.compareTo("Debonairs") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.no_image_debonairs);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //DebonairsLogo
+                                    if(storeName.compareTo("Steers") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagesteers);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //SteersLogo
+                                    if(storeName.compareTo("KFC") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagekfc);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //KFCLogo
+                                    if(storeName.compareTo("Nandos") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagenandos);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //NandosLogo
+                                    if(storeName.compareTo("Hungry Lion") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagenandos);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //KingPieLogo
+                                    if(storeName.compareTo("King Pie") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagekingpie);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //OKFoodsLogo
+                                    if(storeName.compareTo("OK Food") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimageokfoods);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //ClicksLogo
+                                    if(storeName.compareTo("Clicks") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimageclicks);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //HungryLionLogo
+                                    if(storeName.compareTo("Hungry") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagehungrylion);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //
                                 }
 
                                 int imageGeneratedId = findUnusedId();
@@ -454,7 +563,8 @@ removeItem = findViewById(R.id.pbxRemoveItem);
                                 final int finalT = t;
                                 imageAddToCart.setOnClickListener(new View.OnClickListener() {
                                     @Override
-                                    public void onClick(View v) {
+                                    public void onClick(View v)
+                                    {
                                         PersistentData.ArryShoppingCartItemNo.add(PersistentData.ArryItemNo.get(finalT));
                                         PersistentData.ArryShoppingCartItemBrand.add(PersistentData.ArryBrand.get(finalT));
                                         PersistentData.ArryShoppingCartItemDescription.add(PersistentData.ArryDescription.get(finalT));
@@ -469,6 +579,10 @@ removeItem = findViewById(R.id.pbxRemoveItem);
                                         ArryCartTextViewIds.add(txtNewCartItemInfo.getId());
 
                                         String strcurrentSubTotal = String.valueOf(txtSubTotal.getText());
+                                        //if (strcurrentSubTotal.compareTo())
+                                        //{
+
+                                        //}
                                         String strItemPrice = PersistentData.ArryPrice.get(finalT);
                                         double currentSubTotal = Double.parseDouble(strcurrentSubTotal);
                                         double itemPrice = Double.parseDouble(strItemPrice);
@@ -483,19 +597,18 @@ removeItem = findViewById(R.id.pbxRemoveItem);
                                 });
 
                             }
+
+                            if (MaxItemsNo == PersistentData.ArryStoreNo.size()) {
+                                totalNoOfItemsReached = true;
+                            }
                         }
 
-                        if(MaxItemsNo == PersistentData.ArryStoreNo.size())
-                        {
-                            totalNoOfItemsReached = true;
-                        }
                     }
-
+                    executionComplete = true;
                 }
-                executionComplete = true;
-            }
-            progS.setVisibility(View.INVISIBLE);
+                progS.setVisibility(View.INVISIBLE);
 
+            }
         }
 
         @Override

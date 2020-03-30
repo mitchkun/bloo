@@ -28,20 +28,26 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class Splash extends AppCompatActivity {
 
     Connection con;
-    String Appversion;
+    String Appversion = "v1.0";
     ProgressBar progS;
     private static ConnectionClass connectionClass;
     Intent launchHome;
+    Boolean AppValid = true;
+    Date retrievedDate;
+    Timestamp ts;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         Display display = getWindowManager().getDefaultDisplay();
@@ -51,8 +57,106 @@ public class Splash extends AppCompatActivity {
 
         connectionClass = new ConnectionClass();
 
-        getPrices gPrices = new getPrices();
-        gPrices.execute("");
+        chkVersion chkVersion = new chkVersion();
+        chkVersion.execute();
+
+    }
+
+    public class chkVersion extends AsyncTask<String, String, String> {
+        String z = "";
+        Boolean isSuccess = false;
+
+        @Override
+        protected void onPreExecute(){
+        }
+
+        @Override
+        protected void onPostExecute(String r)
+        {
+
+            if(isSuccess == true)
+            {
+                if(AppValid == true)
+                {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            getPrices gP =  new getPrices();
+                            gP.execute("");
+                        }
+                    }, 0);
+                }
+                if(AppValid == false)
+                {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run()
+                        {
+                            Toast.makeText(getBaseContext(), "Bloo critical updates have been implemented. Please Download latest version. Siyabonga", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    }, 3000);
+                }
+            }
+            if(isSuccess == false)
+            {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        Toast.makeText(getBaseContext(), z, Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }, 3000);
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings)
+        {
+
+            try {
+                Connection con = connectionClass.CONN();// Connect to database
+                if (con == null) {
+                    z = "Check Your Internet Access!";
+                    isSuccess = false;
+                    return z;
+                } else
+                {
+                    //Expiry Date
+                    String cmdExpiryDate = "Select [Expiry Date] from [Version Settings] where [VersionNo.] = '"+ Appversion +"'";
+                    Statement stmtExpiryDate = con.createStatement();
+                    ResultSet rsExpiryDate = stmtExpiryDate.executeQuery(cmdExpiryDate);
+
+                    while (rsExpiryDate.next())
+                    {
+                        retrievedDate = rsExpiryDate.getDate(1);
+                    }
+
+                    String cmdGetMaxMNo = "Select CURRENT_TIMESTAMP";
+                    Statement stmtMaxMNo = con.createStatement();
+                    ResultSet rsMaxMNo = stmtMaxMNo.executeQuery(cmdGetMaxMNo);
+
+                    if (rsMaxMNo.next())
+                    {
+                        ts = rsMaxMNo.getTimestamp(1);
+                    }
+
+                    if(retrievedDate.before(ts))
+                    {
+                        AppValid = false;
+                    }
+
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+            }
+            return z;
+        }
     }
 
     public class getPrices extends AsyncTask<String, String, String> {
