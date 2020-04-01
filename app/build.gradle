@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.darkcode.inbox"
+        applicationId "com.elegance.bloo"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -23,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/drawable/logos'] } }
 }
 
 dependencies {

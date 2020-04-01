@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.example.darkcode.esppra.CatalogView">
+    tools:context="com.elegance.bloo.CatalogView">
 
     <ImageView
         android:id="@+id/imageView"
@@ -16,16 +16,6 @@
         app:srcCompat="@drawable/ote" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="false"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:srcCompat="@drawable/bloo_whitewashed" />
-
-    <ImageView
         android:id="@+id/pbxBanner"
         android:layout_width="match_parent"
         android:layout_height="121dp"
@@ -34,17 +24,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/banner_bakground" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="©2019 Bloo"
-        android:textColor="@android:color/black"
-        android:textSize="10sp"
-        android:typeface="serif" />
 
     <TextView
         android:id="@+id/lblSubTotal"

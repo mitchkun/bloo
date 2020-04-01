@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.darkcode.esppra">
+    package="com.elegance.bloo">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,12 +11,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/esppra_logo_app"
+        android:roundIcon="@drawable/esppra_logo_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splash"
+            android:name="com.elegance.bloo.Splash"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
@@ -26,18 +26,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registration"
+            android:name="com.elegance.bloo.Registration"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".CatalogView"
+        <activity android:name="com.elegance.bloo.CatalogView"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".CheckOutActivity"
+        <activity android:name="com.elegance.bloo.CheckOutActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" ></activity>
+
     </application>
 
 </manifest>

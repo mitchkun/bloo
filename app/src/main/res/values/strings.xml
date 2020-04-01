@@ -1,4 +1,31 @@
 <resources>
     <string name="app_name">Bloo</string>
     <string name="servicedesc">This service listens for data changes and forwards notifications.It is safe to use.</string>
+    <string name="app_desc">
+
+    <b>Company:</b> Elegance Websites\n
+                Office 216, Dlanubeka House,\n
+                Cnr, Lalufadlana Str. &amp; Mdada Str.\n
+                <b>Tel:</b>(+268) 2404 7191\n
+                           7632 6021\n
+                           7932 6021\n
+                www.elegancewebsites.com\n\n
+
+        <b>Company Division:</b> Bloo\n
+                <b>Tel:</b>(+268) 2404 7191\n
+                           7632 6021\n
+                           7932 6021\n
+                www.buybloo.com\n\n
+
+       <b>Developers:\n</b>
+             Thando S. Nkambule\n
+             Mitch Dube\n
+             Sthandwayinkosi Mpanza\n
+             Lunga Ndaba\n
+             Gcina Hlophe\n\n
+
+        <b>Version: </b>1.2\n
+        ©2020 Bloo\n
+        All rights reserved.\n
+    </string>
 </resources>
