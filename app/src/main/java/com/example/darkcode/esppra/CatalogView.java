@@ -1,14 +1,15 @@
 package com.example.darkcode.esppra;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -25,10 +26,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import android.app.Activity;
-import android.content.res.Configuration;
-
 
 import static com.example.darkcode.esppra.PersistentData.ArryCartTextViewIds;
 import static com.example.darkcode.esppra.PersistentData.ArryShoppingCartItemBrand;
@@ -247,7 +244,7 @@ public class CatalogView extends AppCompatActivity {
 
                 TextView txtNewCartItemInfo = new TextView(CatalogView.this);
                 txtNewCartItemInfo.setTextColor(Color.BLACK);
-                txtNewCartItemInfo.setText("\n"+ String.valueOf(PersistentData.ArryShoppingCartItemBrand.get(r))+" "+String.valueOf(PersistentData.ArryShoppingCartItemDescription.get(r)) +"@"+String.valueOf(PersistentData.ArryShoppingCartItemPrice.get(r)));
+                txtNewCartItemInfo.setText("\n"+ PersistentData.ArryShoppingCartItemBrand.get(r) +" "+ PersistentData.ArryShoppingCartItemDescription.get(r) +"@"+ PersistentData.ArryShoppingCartItemPrice.get(r));
                 txtNewCartItemInfo.setTypeface(tnrRegular);
 
                 CartLayout.addView(txtNewCartItemInfo);
@@ -368,8 +365,7 @@ public class CatalogView extends AppCompatActivity {
                                         image.setImageResource(R.drawable.noimagespar);
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
-                                    //PicknPayLogo
-                                    if(storeName.compareTo("PicknPay") == 0)
+                                    //PicknPayLog                                    if(storeName.compareTo("PicknPay") == 0)o
                                     {
                                         image.setImageResource(R.drawable.noimagepicknpay);
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -377,7 +373,7 @@ public class CatalogView extends AppCompatActivity {
                                     //BuynSaveSparLogo
                                     if(storeName.compareTo("BuynSave Spar") == 0)
                                     {
-                                        image.setImageResource(R.drawable.no_image_buynsave);
+                                        image.setImageResource(R.drawable.noimagebuynsave);
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
                                     //ShopriteLogo
@@ -419,7 +415,7 @@ public class CatalogView extends AppCompatActivity {
                                     //PizzaInnLogo
                                     if(storeName.compareTo("Debonairs") == 0)
                                     {
-                                        image.setImageResource(R.drawable.no_image_debonairs);
+                                        image.setImageResource(R.drawable.noimagedebonairs);
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
                                     //DebonairsLogo
@@ -471,6 +467,13 @@ public class CatalogView extends AppCompatActivity {
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
                                     //
+                                    //Humba Scientific
+                                    if(storeName.compareTo("Humba Scientific") == 0)
+                                    {
+                                        image.setImageResource(R.drawable.noimagehungrylion);
+                                        image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                    }
+                                    //
                                 }
 
                                 int imageGeneratedId = findUnusedId();
@@ -484,7 +487,7 @@ public class CatalogView extends AppCompatActivity {
                                 TextView txtPrice = null;
                                 txtPrice = new TextView(CatalogView.this);
                                 txtPrice.setTextColor(Color.BLACK);
-                                txtPrice.setText("E" + String.valueOf(PersistentData.ArryPrice.get(t)));
+                                txtPrice.setText("E" + PersistentData.ArryPrice.get(t));
                                 //Brand
                                 TextView txtBrand = null;
                                 txtBrand = new TextView(CatalogView.this);
@@ -572,7 +575,7 @@ public class CatalogView extends AppCompatActivity {
 
                                         TextView txtNewCartItemInfo = new TextView(CatalogView.this);
                                         txtNewCartItemInfo.setTextColor(Color.BLACK);
-                                        txtNewCartItemInfo.setText("\n" + String.valueOf(PersistentData.ArryBrand.get(finalT)) + " " + String.valueOf(PersistentData.ArryDescription.get(finalT)) + "@" + String.valueOf(PersistentData.ArryPrice.get(finalT)));
+                                        txtNewCartItemInfo.setText("\n" + PersistentData.ArryBrand.get(finalT) + " " + PersistentData.ArryDescription.get(finalT) + "@" + PersistentData.ArryPrice.get(finalT));
                                         txtNewCartItemInfo.setTypeface(tnrRegular);
 
                                         CartLayout.addView(txtNewCartItemInfo);

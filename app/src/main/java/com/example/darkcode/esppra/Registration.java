@@ -1,38 +1,26 @@
 package com.example.darkcode.esppra;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.StrictMode;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import org.apache.commons.io.filefilter.RegexFileFilter;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -409,6 +397,13 @@ public class Registration extends AppCompatActivity {
                                     image.setScaleType(ImageView.ScaleType.FIT_XY);
                                 }
 
+                                //HumbaScientific
+                                if(PersistentData.ArryStoreName.get(t).compareTo("Humba Scientific")== 0)
+                                {
+                                    image.setImageResource(R.drawable.humbascientific);
+                                    image.setScaleType(ImageView.ScaleType.FIT_XY);
+                                }
+
                                 final int generatedId = findUnusedId();
                                 StoreLogoList.add(generatedId);
 
@@ -655,6 +650,13 @@ public class Registration extends AppCompatActivity {
                             if(PersistentData.ArryStoreName.get(t).compareTo("Hungry Lion")== 0)
                             {
                                 image.setImageResource(R.drawable.logohungry_lion);
+                                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                            }
+
+                            //HumbaScientific
+                            if(PersistentData.ArryStoreName.get(t).compareTo("Humba Scientific")== 0)
+                            {
+                                image.setImageResource(R.drawable.humbascientific);
                                 image.setScaleType(ImageView.ScaleType.FIT_XY);
                             }
 

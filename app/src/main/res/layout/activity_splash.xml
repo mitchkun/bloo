@@ -11,9 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="-2dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/splash_background2" />
+        app:srcCompat="@android:color/white" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -21,52 +26,20 @@
         android:layout_height="51dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="13dp"
         app:srcCompat="@drawable/elegance_logo" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="©2019 Bloo"
-        android:textColor="@android:color/black"
-        android:textSize="10sp"
-        android:typeface="serif" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView2"
-        android:text="Powered by:"
-        android:textColor="@android:color/black"
-        android:textSize="10sp"
-        android:typeface="serif" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:text="Elegance Websites"
-        android:textColor="@android:color/black"
-        android:textSize="10sp"
-        android:typeface="serif" />
-
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="245dp"
-        android:layout_height="144dp"
+        android:layout_width="119dp"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
         android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="false"
+        android:layout_marginTop="280dp"
         android:layout_marginBottom="123dp"
-        android:layout_marginTop="80dp"
         android:background="@drawable/ote"
         android:scaleType="centerInside" />
 
