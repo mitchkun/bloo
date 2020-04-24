@@ -1,4 +1,4 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

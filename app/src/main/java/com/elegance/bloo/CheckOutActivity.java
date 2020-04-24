@@ -1,9 +1,6 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -12,7 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -20,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsMessage;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -34,7 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.common.base.CharMatcher;
+import com.elegance.esppra.R;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -45,8 +40,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static java.sql.Types.NULL;
 
@@ -433,7 +426,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
                 TextView txtNewCartItemInfo = new TextView(CheckOutActivity.this);
                 txtNewCartItemInfo.setTextColor(Color.BLACK);
-                txtNewCartItemInfo.setText("\n"+ String.valueOf(PersistentData.ArryShoppingCartItemBrand.get(r))+" "+String.valueOf(PersistentData.ArryShoppingCartItemDescription.get(r)) +"@"+String.valueOf(PersistentData.ArryShoppingCartItemPrice.get(r)));
+                txtNewCartItemInfo.setText("\n"+ PersistentData.ArryShoppingCartItemBrand.get(r) +" "+ PersistentData.ArryShoppingCartItemDescription.get(r) +"@"+ PersistentData.ArryShoppingCartItemPrice.get(r));
                 txtNewCartItemInfo.setTypeface(tnrRegular);
 
                 CartLayout.addView(txtNewCartItemInfo);
@@ -574,7 +567,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
             if(isSuccess == false)
             {
-                Toast.makeText(getBaseContext(), z.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), z, Toast.LENGTH_LONG).show();
             }
             if(isSuccess == true)
             {
@@ -612,7 +605,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     {
 
                     String DeliverTo = String.valueOf(txtDeliverTo.getText());
-                    String DeliveryAddress = String.valueOf(cboArea.getSelectedItem()) +": "+ String.valueOf(txtDeliveryAddress.getText());
+                    String DeliveryAddress = cboArea.getSelectedItem() +": "+ txtDeliveryAddress.getText();
                     String Cellphone = String.valueOf(txtCellphone.getText());
                     String Email = "info@buybloo.com";
 

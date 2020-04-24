@@ -1,9 +1,8 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.graphics.drawable.AnimationDrawable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PersistentData{
     // public id generator int

@@ -1,4 +1,4 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.darkcode.inbox", appContext.getPackageName());
+        assertEquals("com.elegance.example.darkcode.inbox", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;

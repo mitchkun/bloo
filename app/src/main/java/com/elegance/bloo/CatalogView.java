@@ -1,4 +1,4 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,6 +20,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.elegance.esppra.R;
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,11 +29,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static com.example.darkcode.esppra.PersistentData.ArryCartTextViewIds;
-import static com.example.darkcode.esppra.PersistentData.ArryShoppingCartItemBrand;
-import static com.example.darkcode.esppra.PersistentData.ArryShoppingCartItemDescription;
-import static com.example.darkcode.esppra.PersistentData.ArryShoppingCartItemNo;
-import static com.example.darkcode.esppra.PersistentData.ArryShoppingCartItemPrice;
+import static com.elegance.bloo.PersistentData.ArryCartTextViewIds;
+import static com.elegance.bloo.PersistentData.ArryShoppingCartItemBrand;
+import static com.elegance.bloo.PersistentData.ArryShoppingCartItemDescription;
+import static com.elegance.bloo.PersistentData.ArryShoppingCartItemNo;
+import static com.elegance.bloo.PersistentData.ArryShoppingCartItemPrice;
 
 public class CatalogView extends AppCompatActivity {
 
@@ -158,7 +160,6 @@ public class CatalogView extends AppCompatActivity {
                 }
             }
         });
-
 
         progS = findViewById(R.id.progS);
         CatLayout = findViewById(R.id.CatLayout);
@@ -365,7 +366,8 @@ public class CatalogView extends AppCompatActivity {
                                         image.setImageResource(R.drawable.noimagespar);
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);
                                     }
-                                    //PicknPayLog                                    if(storeName.compareTo("PicknPay") == 0)o
+                                    //PicknPayLog
+                                    if(storeName.compareTo("PicknPay") == 0)
                                     {
                                         image.setImageResource(R.drawable.noimagepicknpay);
                                         image.setScaleType(ImageView.ScaleType.FIT_XY);

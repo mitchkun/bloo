@@ -1,4 +1,4 @@
-package com.example.darkcode.esppra;
+package com.elegance.bloo;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +9,8 @@ import android.view.Display;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.elegance.esppra.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

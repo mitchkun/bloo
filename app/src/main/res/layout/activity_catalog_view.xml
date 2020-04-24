@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context="com.example.darkcode.esppra.CatalogView">
+    tools:context="com.elegance.CatalogView">
 
     <ImageView
         android:id="@+id/imageView"
@@ -90,15 +90,16 @@
 
     <ScrollView
         android:id="@+id/svCatalogue"
-        android:layout_width="188dp"
-        android:layout_height="match_parent"
+        android:layout_width="181dp"
+        android:layout_height="516dp"
+        android:layout_below="@+id/pbxBanner"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="false"
-        android:layout_below="@+id/pbxBanner"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="5dp">
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="38dp"
+        android:layout_marginRight="230dp"
+        android:layout_marginBottom="15dp">
 
 
         <LinearLayout
@@ -106,18 +107,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
         </LinearLayout>
     </ScrollView>
 
     <ScrollView
         android:id="@+id/svShoppingCart"
-        android:layout_width="193dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="false"
+        android:layout_width="199dp"
+        android:layout_height="416dp"
         android:layout_below="@+id/pbxBanner"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="33dp"
         android:layout_marginBottom="120dp"
-        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/svCatalogue"
         android:background="#a0ffffff">
 
@@ -133,15 +133,17 @@
 
     <ImageView
         android:id="@+id/pbxCheckout"
-        android:layout_width="111dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_width="96dp"
+        android:layout_height="133dp"
+        android:layout_below="@+id/txtSubTotal"
         android:layout_alignParentTop="false"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtSubTotal"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="2dp"
         app:srcCompat="@drawable/checkout" />
 
     <ImageView
